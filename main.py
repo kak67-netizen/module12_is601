@@ -9,6 +9,9 @@ from pydantic import BaseModel
 
 from app import operations
 
+from app.routes.users import router as users_router
+from app.routes.calculations import router as calculations_router
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s %(levelname)s %(name)s %(message)s",
@@ -16,6 +19,8 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 app = FastAPI(title="FastAPI Calculator")
+app.include_router(users_router)
+app.include_router(calculations_router)
 templates = Jinja2Templates(
     directory=Path(__file__).parent / "templates"
 )

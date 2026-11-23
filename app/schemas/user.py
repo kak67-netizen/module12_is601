@@ -7,7 +7,7 @@ class UserCreate(BaseModel):
         min_length=3,
         max_length=50
     )
-    email: EmailStr
+    email: EmailStr = Field(max_length=100)
     password: str = Field(
         min_length=8,
         max_length=128
@@ -20,3 +20,7 @@ class UserRead(BaseModel):
     email: EmailStr
 
     model_config = ConfigDict(from_attributes=True)
+
+class UserLogin(BaseModel):
+    username: str = Field(min_length=3, max_length=50)
+    password: str = Field(min_length=8, max_length=128)
